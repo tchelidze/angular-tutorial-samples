@@ -1,0 +1,23 @@
+<button (click)="show = !show">
+  {{show ? 'Hide' : 'Show'}}
+</button>
+
+<!-- <div *ngIf="show">
+  Nf If
+</div> -->
+
+<div *appKindaIf="show">
+  appKindaIf
+</div>
+
+<div *appRange="[20,30]; name: 'aa'; let num; let numO=num2">
+  {{num}} {{numO}}
+</div>
+
+<ng-template ngFor
+             let-dumb
+             [ngForOf]="dummyCollection"
+             let-i="index">
+  dumb : {{i}} - {{dumb}}
+  <br/>
+</ng-template>

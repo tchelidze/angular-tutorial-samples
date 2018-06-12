@@ -1,0 +1,25 @@
+<app-child>
+
+  <div class="div-root">
+    <div class="div-child" style="border : darkblue">
+      Sample text from parent
+    </div>
+  </div>
+
+  <ng-container ngProjectAs="grandParent">
+    <div>
+      Grand parent content goes heree
+    </div>
+  </ng-container>
+
+  <app-counter (counterIncreased)="counterIncreased($event)"> </app-counter>
+
+  <ng-template>
+    <app-counter (counterIncreased)="counterIncreased($event)"> </app-counter>
+  </ng-template>
+
+  <div>
+    Remaining stuff
+  </div>
+
+</app-child>

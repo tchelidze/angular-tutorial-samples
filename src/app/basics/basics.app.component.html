@@ -1,0 +1,29 @@
+<div class="app">
+  <!-- Template reference -->
+  <h1>Template reference</h1>
+  <button (click)="receiveUsername(username.value)"> Some button
+  </button>
+  <br/>
+  <input type="text"
+         #username
+         placeholder="Please enter username">
+
+  <!-- Template reference -->
+  <hr>
+  <h1>Ng if</h1>
+  <!-- Ng if -->
+  <!-- (change)="true" sits there to make change detection work. -->
+  <input type="text"
+         #search
+         (change)="true"
+         placeholder="Please enter search here."> {{search.value}}
+
+  <div *ngIf="search.value.lengh > 0">
+    You are searching for {{search.value}}
+    <input value="somevalue"
+           #inputWithingNgIf>
+  </div>
+  <!-- This will throw an error, because  inputWithingNgIf is inside structural directive (under the hood, ng-template and hence not accessible outside.-->
+  <!-- {{inputWithingNgIf.value}} -->
+  <!-- Ng if -->
+</div>

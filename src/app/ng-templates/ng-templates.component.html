@@ -1,0 +1,22 @@
+<!-- Inserted from compnent -->
+<div #templatehost> host </div>
+
+<ng-template #tmpl
+             let-name
+             let-srn="surname">
+  <div>
+    Template inserted via component Name : {{name}} Surname : {{srn}}
+  </div>
+</ng-template>
+
+<!-- inserted with template  -->
+
+<ng-container [ngTemplateOutlet]="tmpl2"
+              [ngTemplateOutletContext]="templateContext"></ng-container>
+<ng-template #tmpl2
+             let-name
+             let-srn="surname">
+  <div>
+    Template inserted via component Name : {{name}} Surname : {{srn}}
+  </div>
+</ng-template>

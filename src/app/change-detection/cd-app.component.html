@@ -1,0 +1,11 @@
+<div>
+    <button (click)="addProp()"> Add property </button>
+    <button (click)="changeUser()">Change user object</button>
+    <button (click)="changeName()"> Change name property </button>
+    <div class="users">
+        <hr/>
+        <app-cd-one [user]="user"></app-cd-one>
+        <hr/>
+        <app-cd-two [user]="user"></app-cd-two>
+    </div>
+</div>

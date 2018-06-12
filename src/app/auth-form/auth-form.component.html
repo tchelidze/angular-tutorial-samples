@@ -1,0 +1,27 @@
+<div class="container">
+    <form #form="ngForm"
+          (ngSubmit)="onSubmit(form.value)">
+        {{title}}
+        <div class="form-group">
+            <label for="email">
+                Email
+            </label>
+            <input type="text"
+                   name="email"
+                   #emailElement
+                   class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password"
+                   name="password"
+                   class="form-control">
+        </div>
+        <ng-content select="app-auth-remember"></ng-content>
+        <app-auth-message [style.display]="(isRememberMeChecked ? 'inherit' : 'none')"></app-auth-message>
+        <button type="submit"
+                class="btn btn-primary">
+            Login
+        </button>
+    </form>
+</div>

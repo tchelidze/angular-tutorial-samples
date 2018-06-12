@@ -1,0 +1,41 @@
+<div style="border-width: 1px; border-color: green;">
+  Child header
+</div>
+
+<!-- catch all selector, will render REMAINING elements (which are not selected by other ng-content's) -->
+<ng-content></ng-content>
+
+<!-- displays nothing, we can ONLY select root level elements -->
+<ng-content select=".div-child"></ng-content>
+
+<ng-content select=".div-root"></ng-content>
+<ng-content select="grandParent"></ng-content>
+
+<!-- togglable content -->
+<!-- Notice : when you show/hide content counter component IS NOT recreated (id is always 1) it just rerenders same content provided by parent.
+  Details https://medium.com/claritydesignsystem/ng-content-the-hidden-docs-96a29d70d11b -->
+<button (click)="show = !show">
+  {{show ? 'Hide' : 'Show'}}
+</button>
+
+<div *ngIf="show">
+  Notice Id is always 1
+  <ng-content select="app-counter"></ng-content>
+</div>
+<!-- togglable content -->
+
+<!-- togglable recreatable content -->
+<!-- Notice : when you show/hide content counter component IS recreated (id is increasing). Details https://medium.com/claritydesignsystem/ng-content-the-hidden-docs-96a29d70d11b -->
+<button (click)="show2 = !show2">
+  {{show2 ? 'Hide' : 'Show'}}
+</button>
+
+<div *ngIf="show2">
+  Notice Id is increasing
+  <ng-container [ngTemplateOutlet]="appcounterTemplate"></ng-container>
+</div>
+<!-- togglable content -->
+
+<div>
+  Child footer
+</div>
