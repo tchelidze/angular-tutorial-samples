@@ -1,29 +1,98 @@
+<div>
+  <h2> Select which demos to show </h2>
+  <ul>
+    <li>
+      Binding Demo
+      <input type="checkbox"
+             [(ngModel)]="showBindingsDemo" />
+    </li>
+    <li>
+      NgIf Demo
+      <input type="checkbox"
+             [(ngModel)]="showNgIfDemo">
+    </li>
+    <li>
+      NgFor Demo
+      <input type="checkbox"
+             [(ngModel)]="showNgForDemo" />
+    </li>
+  </ul>
+</div>
+
 <div class="app">
-  <!-- Template reference -->
-  <h1>Template reference</h1>
-  <button (click)="receiveUsername(username.value)"> Some button
-  </button>
-  <br/>
-  <input type="text"
-         #username
-         placeholder="Please enter username">
 
-  <!-- Template reference -->
-  <hr>
-  <h1>Ng if</h1>
-  <!-- Ng if -->
-  <!-- (change)="true" sits there to make change detection work. -->
-  <input type="text"
-         #search
-         (change)="true"
-         placeholder="Please enter search here."> {{search.value}}
+  <!-- Bindings -->
+  <div *ngIf="showBindingsDemo">
+    <h1>Bindings</h1>
+    Interpolation : {{bindings.fieldOne}}
+    <br/>
+    <!-- Setup 2 way binding 'manually' -->
+    <input [value]="bindings.fieldOne"
+           (input)="bindings.bindFromInput($event.target.value)" />
 
-  <div *ngIf="search.value.lengh > 0">
-    You are searching for {{search.value}}
-    <input value="somevalue"
-           #inputWithingNgIf>
+    <input [(ngModel)]="bindings.fieldOne" />
+    <!-- /Bindings -->
+
+    <!-- Template reference variable -->
+    <h1>Template reference</h1>
+    <button (click)="logTemplateVariableValue(username.value)"> Log template variable value </button>
+    <br/>
+    <input type="text"
+           #username
+           placeholder="Please enter username">
   </div>
-  <!-- This will throw an error, because  inputWithingNgIf is inside structural directive (under the hood, ng-template and hence not accessible outside.-->
-  <!-- {{inputWithingNgIf.value}} -->
+  <!-- /Template reference variable -->
+  <hr>
   <!-- Ng if -->
+  <div *ngIf="showNgIfDemo">
+    <h1>Ng if</h1>
+    <!-- (change)="true" sits there to make change detection work.
+    `search` template variable's value will be updated on blur. -->
+    <input type="text"
+           #search
+           (change)="true"
+           placeholder="Please enter search here."> {{search.value.length > 0}}
+
+    <div *ngIf="search.value.lengh > 0">
+      You are searching for {{search.value}}
+      <input value="somevalue"
+             #inputWithingNgIf>
+    </div>
+    <!-- Below will throw an error, because  inputWithingNgIf is inside structural directive (under the hood, <ng-template [ngIf]..  and hence not accessible outside.
+       Same applies for any structural directive. More info http://weblogs.thinktecture.com/thomas/2017/05/use-angular-template-reference-variables-anywhere-in-the-template-not.html
+      -->
+    <!-- {{inputWithingNgIf.value}} -->
+
+  </div>
+  <!-- /Ng if -->
+  <hr/>
+  <!-- Ng For -->
+  <div *ngIf="showNgForDemo">
+    <h1>Ng For</h1>
+
+    <h3>Asterix syntax</h3>
+    <ul>
+      <li *ngFor="let person of ngForData.personCollection; let i = index;">
+        <span class="status"
+              [class.employed]="person.employed"></span>
+        {{i}} - id : {{person.id}} name : {{person.name}}
+      </li>
+    </ul>
+
+    <h3>Ng Template syntax</h3>
+    <ul>
+      <ng-template ngFor
+                   let-person
+                   let-i="index"
+                   [ngForOf]="ngForData.personCollection">
+        <li>
+          <span class="status"
+                [ngClass]="{'employed' : person.employed}"></span>
+          id : {{person.id}} name : {{person.name}}
+        </li>
+      </ng-template>
+    </ul>
+
+  </div>
+  <!-- /Ng For -->
 </div>
